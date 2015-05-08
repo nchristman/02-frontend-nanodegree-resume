@@ -4,7 +4,7 @@ var bio = {
   "welcomeMessage": "Hi, I'm Nate",
   "contacts": {
     "email": "nate.christman@gmail.com",
-    "location": "Seattle, WA".
+    "location": "Seattle, WA",
     "github": "nchristman",
     "phone": "(859) 322-9655"
   },
@@ -92,3 +92,75 @@ var projects = {
     }
   ]
 }
+
+$(document).ready(function() {
+  // Check if our bio has skills, and it's not empty.
+  if (bio.skills.length) {
+    // If true, append the <ul>
+    $("#header").append(HTMLskillsStart);
+    // Iterate through the array and replace and append
+    for (var i = 0; i < bio.skills.length; i++) {
+      var newSkill = HTMLskills.replace("%data%", bio.skills[i]);
+      $("#skills").append(newSkill);
+    }
+  }
+
+  function displayWork() {
+    for (job in work.jobs) {
+      var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+      var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+      var formattedTitleAndEmployer = formattedEmployer + formattedTitle;
+      var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+      var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+      var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+
+      $("#workExperience").append(HTMLworkStart);
+      $(".work-entry:last").append(formattedTitleAndEmployer);
+      $(".work-entry:last").append(formattedDates);
+      $(".work-entry:last").append(formattedLocation);
+      $(".work-entry:last").append(formattedDescription);
+    }
+  }
+  displayWork();
+
+  // $("#main").append(internationalizeButton);
+
+  function inName(name) {
+    var intlNameArray = name.split(" ");
+    var formattedFirstName = intlNameArray[0];
+    var formattedLastName = intlNameArray[1].toUpperCase();
+
+    return formattedFirstName + " " + formattedLastName;
+  }
+  inName("Nate Christman");
+
+  projects.display = function() {
+    var projectsObject = projects.projects;
+    console.log(projectsObject);
+    // for (project in projectsObject) {
+    //   var formattedTitle = HTMLprojectTitle.replace("%data%", projectsObject[project].title);
+    //   var formattedDates = HTMLprojectDates.replace("%data%", projectsObject[project].dates);
+    //   var formattedDescription = HTMLprojectDescription.replace("%data%", projectsObject[project].description);
+
+    //   $("#projects").append(HTMLprojectStart);
+    //   $(".project-entry:last").append(formattedTitle);
+    //   $(".project-entry:last").append(formattedDates);
+    //   $(".project-entry:last").append(formattedDescription);
+    // }
+    for (var i = 0; i < projectsObject.length; i++) {
+      var formattedTitle = HTMLprojectTitle.replace("%data%", projectsObject[i].title);
+      var formattedDates = HTMLprojectDates.replace("%data%", projectsObject[i].dates);
+      var formattedDescription = HTMLprojectDescription.replace("%data%", projectsObject[i].description);
+
+      $("#projects").append(HTMLprojectStart);
+      $(".project-entry:last").append(formattedTitle);
+      $(".project-entry:last").append(formattedDates);
+      $(".project-entry:last").append(formattedDescription);
+      for (var j = 0; j < projectsObject[i].images.length; j++) {
+        var formattedImage = HTMLprojectImage.replace("%data%", projectsObject[i].images[j]);
+        $(".project-entry:last").append(formattedImage);
+      }
+    }
+  }
+  projects.display();
+})
