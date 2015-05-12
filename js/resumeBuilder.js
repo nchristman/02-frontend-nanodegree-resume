@@ -123,7 +123,6 @@ $(document).ready(function() {
   }
   displayWork();
 
-  // $("#main").append(internationalizeButton);
 
   function inName(name) {
     var intlNameArray = name.split(" ");
@@ -136,17 +135,7 @@ $(document).ready(function() {
 
   projects.display = function() {
     var projectsObject = projects.projects;
-    console.log(projectsObject);
-    // for (project in projectsObject) {
-    //   var formattedTitle = HTMLprojectTitle.replace("%data%", projectsObject[project].title);
-    //   var formattedDates = HTMLprojectDates.replace("%data%", projectsObject[project].dates);
-    //   var formattedDescription = HTMLprojectDescription.replace("%data%", projectsObject[project].description);
 
-    //   $("#projects").append(HTMLprojectStart);
-    //   $(".project-entry:last").append(formattedTitle);
-    //   $(".project-entry:last").append(formattedDates);
-    //   $(".project-entry:last").append(formattedDescription);
-    // }
     for (var i = 0; i < projectsObject.length; i++) {
       var formattedTitle = HTMLprojectTitle.replace("%data%", projectsObject[i].title);
       var formattedDates = HTMLprojectDates.replace("%data%", projectsObject[i].dates);
@@ -156,6 +145,7 @@ $(document).ready(function() {
       $(".project-entry:last").append(formattedTitle);
       $(".project-entry:last").append(formattedDates);
       $(".project-entry:last").append(formattedDescription);
+      
       for (var j = 0; j < projectsObject[i].images.length; j++) {
         var formattedImage = HTMLprojectImage.replace("%data%", projectsObject[i].images[j]);
         $(".project-entry:last").append(formattedImage);
