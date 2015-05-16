@@ -23,16 +23,37 @@ var work = {
     {
       "employer": "projekt202",
       "title": "UX Designer",
-      "location":"Dallas, TX - Seattle, WA",
+      "location":["Addison, TX", "Seattle, WA"],
       "dates": "03/12 - 06/14",
       "description": "Consulted for Expedia and Amazon"
     },
     {
       "employer": "Freelance",
       "title": "Designer",
-      "location": "Dallas, TX",
+      "location": "East Dallas, Dallas, TX",
       "dates": "07/04 - current",
       "description": "Gun for hire"
+    },
+    {
+      "employer": "Hawkeye",
+      "title": "Art Director",
+      "location": "Uptown, Dallas, TX",
+      "dates": "04/10 - 7/11",
+      "description": "Direct marketing agency, interactive division"
+    },
+    {
+      "employer": "TM Advertising",
+      "title": "Art Director",
+      "location": "Downtown, Dallas, TX",
+      "dates": "09/08 - 12/09",
+      "description": "Worked with American Airlines, Nationwide Insurance, and many new business pitches"
+    },
+    {
+      "employer": "Fallon",
+      "title": "Art Director",
+      "location": "Minneapolis, MN",
+      "dates": "11/07 - 07/08",
+      "description": "First real world gig"
     }
   ]
 }
@@ -44,8 +65,14 @@ var education = {
       "location": "Atlanta, GA",
       "degree": "Art Direction",
       "majors": ["Art direction", "Design"],
-      "dates": "09/05 - 10/07",
-      "url": "www.creativecircus.edu"
+      "dates": "09/05 - 10/07"
+    },
+    {
+      "name": "Cincinnati Academy of Design",
+      "location": "Eden Park, Cincinnati, OH",
+      "degree": "Art Direction",
+      "majors": ["Art direction", "Design"],
+      "dates": "04/02 - 04/04"
     }
   ],
   "onlineCourses" : [
@@ -124,14 +151,37 @@ $(document).ready(function() {
   displayWork();
 
 
-  function inName(name) {
-    var intlNameArray = name.split(" ");
-    var formattedFirstName = intlNameArray[0];
-    var formattedLastName = intlNameArray[1].toUpperCase();
+  // function inName(name) {
+  //   var intlNameArray = name.split(" ");
+  //   var formattedFirstName = intlNameArray[0];
+  //   var formattedLastName = intlNameArray[1].toUpperCase();
 
-    return formattedFirstName + " " + formattedLastName;
+  //   return formattedFirstName + " " + formattedLastName;
+  // }
+  // inName("Nate Christman");
+
+  education.display = function() {
+    var schoolsObject = education.schools;
+    var onlineCoursesObject = education.onlineCourses;
+
+    for (var i = 0; i < schoolsObject.length; i++) {
+      var formattedName = HTMLschoolName.replace("%data%", schoolsObject[i].name);
+      var formattedDegree = HTMLschoolDegree.replace("%data%", schoolsObject[i].degree);
+      var formattedDates = HTMLschoolDates.replace("%data%", schoolsObject[i].dates);
+      var formattedLocation = HTMLschoolLocation.replace("%data%", schoolsObject[i].location);
+
+      $("#education").append(HTMLschoolStart);
+      $(".education-entry:last").append(formattedName + formattedDegree);
+      $(".education-entry:last").append(formattedDates);
+      $(".education-entry:last").append(formattedLocation);
+      
+      for (var j = 0; j < schoolsObject[i].majors.length; j++) {
+        var formattedMajor = HTMLschoolMajor.replace("%data%", schoolsObject[i].majors[j]);
+        $(".education-entry:last").append(formattedMajor);
+      }
+    }
   }
-  inName("Nate Christman");
+  education.display();
 
   projects.display = function() {
     var projectsObject = projects.projects;
