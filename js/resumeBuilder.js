@@ -123,7 +123,9 @@ var projects = {
 
 $(document).ready(function() {
 
+  // Add the display method to bio
   bio.display = function() {
+    //  Declare all of my variables with formatted data
     var formattedName = HTMLheaderName.replace("%data%", bio.name);
     var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
     var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.phone);
@@ -133,14 +135,17 @@ $(document).ready(function() {
     var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
     var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
 
+    // Write the formatted data to the page
     $("#header").prepend(formattedRole);
     $("#header").prepend(formattedName);
     $("#header").append(formattedBioPic);
     $("#header").append(formattedWelcomeMsg);
+    // Write the contact list to the header
     $("#topContacts").append(formattedMobile);
     $("#topContacts").append(formattedEmail);
     $("#topContacts").append(formattedGithub);
     $("#topContacts").append(formattedLocation);
+    // Write the contact list to the footer
     $("#footerContacts").append(formattedMobile);
     $("#footerContacts").append(formattedEmail);
     $("#footerContacts").append(formattedGithub);
@@ -151,7 +156,8 @@ $(document).ready(function() {
     if (bio.skills.length) {
       // If true, append the <ul>
       $("#header").append(HTMLskillsStart);
-      // Iterate through the array and replace and append
+
+      // Iterate through the skills array and write the formatted data to the page
       for (var i = 0; i < bio.skills.length; i++) {
         var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
         $("#skills").append(formattedSkill);
@@ -161,7 +167,9 @@ $(document).ready(function() {
   bio.display();
 
   work.display = function() {
+    // Iterate through the jobs array
     for (job in work.jobs) {
+      //  Declare all of my variables with formatted data
       var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
       var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
       var formattedTitleAndEmployer = formattedEmployer + formattedTitle;
@@ -169,6 +177,7 @@ $(document).ready(function() {
       var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
       var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
 
+      // Write the formatted data to the page
       $("#workExperience").append(HTMLworkStart);
       $(".work-entry:last").append(formattedTitleAndEmployer);
       $(".work-entry:last").append(formattedDates);
@@ -178,31 +187,26 @@ $(document).ready(function() {
   }
   work.display();
 
-
-  // function inName(name) {
-  //   var intlNameArray = name.split(" ");
-  //   var formattedFirstName = intlNameArray[0];
-  //   var formattedLastName = intlNameArray[1].toUpperCase();
-
-  //   return formattedFirstName + " " + formattedLastName;
-  // }
-  // inName("Nate Christman");
-
   education.display = function() {
+    // Create more readable variables
     var schoolsObject = education.schools;
     var onlineCoursesObject = education.onlineCourses;
 
+    // Iterate through the schools array
     for (var i = 0; i < schoolsObject.length; i++) {
+      //  Declare all of my variables with formatted data
       var formattedName = HTMLschoolName.replace("%data%", schoolsObject[i].name);
       var formattedDegree = HTMLschoolDegree.replace("%data%", schoolsObject[i].degree);
       var formattedDates = HTMLschoolDates.replace("%data%", schoolsObject[i].dates);
       var formattedLocation = HTMLschoolLocation.replace("%data%", schoolsObject[i].location);
 
+      // Write the formatted data to the page
       $("#education").append(HTMLschoolStart);
       $(".education-entry:last").append(formattedName + formattedDegree);
       $(".education-entry:last").append(formattedDates);
       $(".education-entry:last").append(formattedLocation);
       
+      // Iterate through the majors array and write the formatted data to the page
       for (var j = 0; j < schoolsObject[i].majors.length; j++) {
         var formattedMajor = HTMLschoolMajor.replace("%data%", schoolsObject[i].majors[j]);
         $(".education-entry:last").append(formattedMajor);
@@ -210,12 +214,15 @@ $(document).ready(function() {
     }
 
     $("#education").append(HTMLonlineClasses);
+    // Iterate through the onlineCourses array
     for (var i = 0; i < onlineCoursesObject.length; i++) {
+      //  Declare all of my variables with formatted data
       var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", onlineCoursesObject[i].title);
       var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", onlineCoursesObject[i].school);
       var formattedOnlineDates = HTMLonlineDates.replace("%data%", onlineCoursesObject[i].dates);
       var formattedOnlineURL = HTMLonlineURL.replace("%data%", onlineCoursesObject[i].url);
 
+      // Write the formatted data to the page
       $("#education").append(HTMLschoolStart);
       $(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
       $(".education-entry:last").append(formattedOnlineDates);
@@ -225,9 +232,12 @@ $(document).ready(function() {
   education.display();
 
   projects.display = function() {
+    // Create a more readable variable
     var projectsObject = projects.projects;
 
+    // Iterate through the projects array
     for (var i = 0; i < projectsObject.length; i++) {
+      //  Declare all of my variables with formatted data
       var formattedTitle = HTMLprojectTitle.replace("%data%", projectsObject[i].title);
       var formattedDates = HTMLprojectDates.replace("%data%", projectsObject[i].dates);
       var formattedDescription = HTMLprojectDescription.replace("%data%", projectsObject[i].description);
@@ -237,6 +247,7 @@ $(document).ready(function() {
       $(".project-entry:last").append(formattedDates);
       $(".project-entry:last").append(formattedDescription);
       
+      // Iterate through the images array and write the formatted data to the page
       for (var j = 0; j < projectsObject[i].images.length; j++) {
         var formattedImage = HTMLprojectImage.replace("%data%", projectsObject[i].images[j]);
         $(".project-entry:last").append(formattedImage);
