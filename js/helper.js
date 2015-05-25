@@ -111,7 +111,7 @@ function initializeMap() {
   };
 
   // This next line makes `map` a new Google Map JavaScript Object and attaches it to
-  // <div id="map">, which is appended as part of an exercise late in the course.
+  // <div id="mapDiv">, which is appended as part of an exercise late in the course.
   map = new google.maps.Map(document.querySelector('#mapDiv'), mapOptions);
 
 
@@ -166,12 +166,13 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: "<h4 class='marker-heading'>" + name + "</h4><p>" + lat + ", " + lon + "</p>"
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.

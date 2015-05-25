@@ -213,3 +213,8 @@ span {
     display: block;
   }
 }
+
+/* Custom CSS here */
+.marker-heading {
+  padding: 0;
+}
