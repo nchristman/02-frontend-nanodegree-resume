@@ -83,3 +83,39 @@ function alphabetizer(names) {
 console.log(alphabetizer(moonWalkers));
 
 // Test 3
+// Got the iteration code from http://stackoverflow.com/questions/19323699/iterating-through-json-object-javascript
+function totalBytes(psiResults) {
+  var obj = psiResults.pageStats;
+  var totalWeight = 0;
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      var val = obj[key];
+      if (typeof val === 'string') {
+        var convertedNumber = parseInt(val, 10);
+        totalWeight += convertedNumber;
+      }
+    }
+  }
+  return totalWeight;
+}
+
+// Got this nested for in code from: http://stackoverflow.com/questions/921789/how-to-loop-through-javascript-object-literal-with-objects-as-members
+function ruleList(psiResults) {
+  var formatted = psiResults.formattedResults.ruleResults;
+  var ruleArray = [];
+  for (var key in formatted) {
+    if (formatted.hasOwnProperty(key)) {
+       var obj = formatted[key];
+        for (var prop in obj) {
+          // important check that this is objects own property 
+          // not from prototype prop inherited
+          if(obj.hasOwnProperty(prop)){
+            if (prop === "localizedRuleName") {
+              ruleArray.push(obj[prop]);
+            }
+          }
+       }
+    }
+  }
+  return ruleArray;
+}
