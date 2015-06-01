@@ -9,7 +9,47 @@ var bio = {
     "phone": "(859) 322-9655"
   },
   "bioPic": "http://placekitten.com/g/250/250",
-  "skills": ["Interaction design", "visual design", "rapid prototyping"]
+  "skills": ["Interaction design", "visual design", "rapid prototyping"],
+  "display" : function() {
+    //  Declare all of my variables with formatted data
+    var formattedName = HTMLheaderName.replace("%data%", bio.name);
+    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+    var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.phone);
+    var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+    var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+    var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+    var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+    var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+
+    // Write the formatted data to the page
+    $("#header").prepend(formattedRole);
+    $("#header").prepend(formattedName);
+    $("#header").append(formattedBioPic);
+    $("#header").append(formattedWelcomeMsg);
+    // Write the contact list to the header
+    $("#topContacts").append(formattedMobile);
+    $("#topContacts").append(formattedEmail);
+    $("#topContacts").append(formattedGithub);
+    $("#topContacts").append(formattedLocation);
+    // Write the contact list to the footer
+    $("#footerContacts").append(formattedMobile);
+    $("#footerContacts").append(formattedEmail);
+    $("#footerContacts").append(formattedGithub);
+    $("#footerContacts").append(formattedLocation);
+
+
+    // Check if our bio has skills, and it's not empty.
+    if (bio.skills.length) {
+      // If true, append the <ul>
+      $("#header").append(HTMLskillsStart);
+
+      // Iterate through the skills array and write the formatted data to the page
+      for (var i = 0; i < bio.skills.length; i++) {
+        var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
+        $("#skills").append(formattedSkill);
+      }
+    }
+  }
 }
 
 var work = {
@@ -56,7 +96,26 @@ var work = {
       "dates": "11/07 - 07/08",
       "description": "First real world gig"
     }
-  ]
+  ],
+  "display": function() {
+    // Iterate through the jobs array
+    for (job in work.jobs) {
+      //  Declare all of my variables with formatted data
+      var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+      var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+      var formattedTitleAndEmployer = formattedEmployer + formattedTitle;
+      var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+      var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+      var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+
+      // Write the formatted data to the page
+      $("#workExperience").append(HTMLworkStart);
+      $(".work-entry:last").append(formattedTitleAndEmployer);
+      $(".work-entry:last").append(formattedDates);
+      $(".work-entry:last").append(formattedLocation);
+      $(".work-entry:last").append(formattedDescription);
+    }
+  }
 }
 
 var education = {
@@ -95,99 +154,8 @@ var education = {
       "dates": "12/12 - 04/13",
       "url": "www.codeacademy.com"
     }
-  ]
-}
-
-var projects = {
-  "projects": [
-    {
-      "title": "Expedia Framework",
-      "dates": "06/14 - current",
-      "description": "Design and maintain the framework components and patterns that power Expedia.com and it's other properties and partners",
-      "images": ["http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250"]
-    },
-    {
-      "title": "Amazon Fire Phone",
-      "dates": "05/14 - 06/14",
-      "description": "Worked with the internal team to design the 'sizzle' site for the Amazon Fire phone",
-      "images": ["http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250"]
-    },
-    {
-      "title": "Expedia Flights",
-      "dates": "03/12 - 05/14",
-      "description": "Worked on the flights product. Started with fixed width, top/left design, and slowly but surely got the path to a responsive state.",
-      "images": ["http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250"]
-    }
-  ]
-}
-
-$(document).ready(function() {
-
-  // Add the display method to bio
-  bio.display = function() {
-    //  Declare all of my variables with formatted data
-    var formattedName = HTMLheaderName.replace("%data%", bio.name);
-    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-    var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.phone);
-    var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-    var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-    var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-    var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-    var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
-
-    // Write the formatted data to the page
-    $("#header").prepend(formattedRole);
-    $("#header").prepend(formattedName);
-    $("#header").append(formattedBioPic);
-    $("#header").append(formattedWelcomeMsg);
-    // Write the contact list to the header
-    $("#topContacts").append(formattedMobile);
-    $("#topContacts").append(formattedEmail);
-    $("#topContacts").append(formattedGithub);
-    $("#topContacts").append(formattedLocation);
-    // Write the contact list to the footer
-    $("#footerContacts").append(formattedMobile);
-    $("#footerContacts").append(formattedEmail);
-    $("#footerContacts").append(formattedGithub);
-    $("#footerContacts").append(formattedLocation);
-
-
-    // Check if our bio has skills, and it's not empty.
-    if (bio.skills.length) {
-      // If true, append the <ul>
-      $("#header").append(HTMLskillsStart);
-
-      // Iterate through the skills array and write the formatted data to the page
-      for (var i = 0; i < bio.skills.length; i++) {
-        var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
-        $("#skills").append(formattedSkill);
-      }
-    }
-  }
-  bio.display();
-
-  work.display = function() {
-    // Iterate through the jobs array
-    for (job in work.jobs) {
-      //  Declare all of my variables with formatted data
-      var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-      var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-      var formattedTitleAndEmployer = formattedEmployer + formattedTitle;
-      var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-      var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-      var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-
-      // Write the formatted data to the page
-      $("#workExperience").append(HTMLworkStart);
-      $(".work-entry:last").append(formattedTitleAndEmployer);
-      $(".work-entry:last").append(formattedDates);
-      $(".work-entry:last").append(formattedLocation);
-      $(".work-entry:last").append(formattedDescription);
-    }
-  }
-  work.display();
-
-  education.display = function() {
+  ],
+  "display": function() {
     // Create more readable variables
     var schoolsObject = education.schools;
     var onlineCoursesObject = education.onlineCourses;
@@ -229,9 +197,30 @@ $(document).ready(function() {
       $(".education-entry:last").append(formattedOnlineURL);
     }
   }
-  education.display();
+}
 
-  projects.display = function() {
+var projects = {
+  "projects": [
+    {
+      "title": "Expedia: Framework",
+      "dates": "06/14 - current",
+      "description": "Design and maintain the framework components and patterns that power Expedia.com and it's other properties and partners",
+      "images": ["http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250"]
+    },
+    {
+      "title": "Amazon: Fire Phone",
+      "dates": "05/14 - 06/14",
+      "description": "Worked with the internal team to design the 'sizzle' site for the Amazon Fire phone",
+      "images": ["http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250"]
+    },
+    {
+      "title": "Expedia: Flights",
+      "dates": "03/12 - 05/14",
+      "description": "Worked on the flights product. Started with fixed width, top/left design, and slowly but surely got the path to a responsive state.",
+      "images": ["http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250"]
+    }
+  ],
+  "display": function() {
     // Create a more readable variable
     var projectsObject = projects.projects;
 
@@ -254,6 +243,20 @@ $(document).ready(function() {
       }
     }
   }
+}
+
+$(document).ready(function() {
+
+  // Call the display method to render the bio/header section on the page
+  bio.display();
+
+  // Call the display method to render the work experience section on the page
+  work.display();
+
+  // Call the display method to render the education and online classes section on the page
+  education.display();
+
+  // Call the display method to render the projects section on the page
   projects.display();
 
 });
