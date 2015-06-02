@@ -218,3 +218,7 @@ span {
 .marker-heading {
   padding: 0;
 }
+
+#skills {
+  flex-direction: column;
+}

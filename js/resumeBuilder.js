@@ -1,7 +1,7 @@
 var bio = {
   "name": "Nate Christman",
   "role": "Designer",
-  "welcomeMessage": "Hi, I'm Nate",
+  "welcomeMessage": "Hi, I'm Nate. I'm a product designer at Expedia. Clearly I like cats.",
   "contacts": {
     "email": "nate.christman@gmail.com",
     "location": "West Seattle, Seattle, WA",
@@ -205,19 +205,19 @@ var projects = {
       "title": "Expedia: Framework",
       "dates": "06/14 - current",
       "description": "Design and maintain the framework components and patterns that power Expedia.com and it's other properties and partners",
-      "images": ["http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250"]
+      "images": ["http://placekitten.com/g/200/150", "http://placekitten.com/g/200/150", "http://placekitten.com/g/200/150"]
     },
     {
       "title": "Amazon: Fire Phone",
       "dates": "05/14 - 06/14",
       "description": "Worked with the internal team to design the 'sizzle' site for the Amazon Fire phone",
-      "images": ["http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250"]
+      "images": ["http://placekitten.com/g/200/150", "http://placekitten.com/g/200/150", "http://placekitten.com/g/200/150"]
     },
     {
       "title": "Expedia: Flights",
       "dates": "03/12 - 05/14",
       "description": "Worked on the flights product. Started with fixed width, top/left design, and slowly but surely got the path to a responsive state.",
-      "images": ["http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250", "http://placekitten.com/g/300/250"]
+      "images": ["http://placekitten.com/g/200/150", "http://placekitten.com/g/200/150", "http://placekitten.com/g/200/150"]
     }
   ],
   "display": function() {
